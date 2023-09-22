@@ -1,0 +1,56 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>home</title>
+</head>
+
+<body>
+<div class="container">
+    <form method="post" action="/">
+        {% csrf_token %}
+        <input class="input-box" name="page" type="text" placeholder="Enter your link....">
+        <br>
+
+        <div class="button-group">
+            <button class="submit-button" type="submit" name="submit_action">Submit</button>
+            <form method="post" action="{% url 'clear_table' %}">
+                {% csrf_token %}
+                <button class="clear-button" type="submit" name="delete_action">Clear</button>
+            </form>
+        </div>
+    </form>
+    </div>
+
+    <div class="outer-wrapper">
+    <div class="table-wrapper center-table">
+    <table>
+        <thead>
+            
+            <th>name</th>
+            <th>Link</th>
+
+        </thead>
+         {% for i in data_values %}
+        <tbody>
+            <tr>
+
+                <td>{{i.string_name}}</td>
+                <td>{{i.address}}</td>
+
+            </tr>
+
+        </tbody>
+         {% endfor %}
+    </table>
+</div>
+</div>
+</body>
+
+</html>
